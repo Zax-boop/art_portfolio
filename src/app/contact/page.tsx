@@ -22,13 +22,10 @@ export default function Contact() {
     };
 
     return (
-        <div className="bg-white min-h-screen flex flex-col w-full items-center">
-            <h1 className="text-2xl md:text-4xl font-bold mb-2 md:mb-8 text-black animate-fadeIn mt-8 md:mt-20">
-                Contact
-            </h1>
+        <div className="bg-white flex flex-col w-full items-center">
             <form
                 onSubmit={handleSubmit}
-                className="flex flex-col w-11/12 max-w-lg gap-6"
+                className="flex flex-col w-11/12 max-w-lg gap-6 mt-12 md:mt-0"
             >
                 <div
                     className="relative group opacity-0 translate-y-4 animate-fadeInUp"
@@ -87,7 +84,7 @@ export default function Contact() {
                 </div>
                 <button
                     type="submit"
-                    className="self-start bg-black text-white px-6 py-3 rounded hover:bg-gray-900 transition-colors duration-300 opacity-0 animate-fadeInUp"
+                    className="self-start px-6 py-3 rounded hover:bg-gray-900 opacity-0 animate-fadeInUp flex items-center justify-center gap-2 bg-white border border-black text-black hover:text-white transition duration-300 cursor-pointer"
                     style={{ animationDelay: "0.7s", animationFillMode: "forwards" }}
                 >
                     Send

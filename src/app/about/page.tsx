@@ -31,8 +31,8 @@ export default function About() {
   }, []);
 
   return (
-    <div className="bg-white min-h-screen flex flex-col w-full items-center text-black pb-20">
-      <div className="flex flex-col lg:flex-row w-11/12 mt-20 mb-20 gap-10 items-center lg:items-start">
+    <div className="bg-white overflow-clip flex flex-col w-full items-center text-black pb-20">
+      <div className="flex flex-col lg:flex-row w-11/12 md:mt-20 mb-20 gap-10 items-center lg:items-start">
         <div
           ref={textRef}
           className={`flex flex-col lg:w-2/3 transition-opacity duration-1000 ease-out ${
@@ -48,11 +48,9 @@ export default function About() {
             free to reach out if you'd like to collaborate or learn more about my art!
           </p>
         </div>
-
-        {/* Portrait Section */}
         <div
           ref={imgRef}
-          className={`flex flex-col lg:w-1/3 transition-opacity duration-1000 ease-out ${
+          className={`flex flex-col lg:w-1/3 transition-opacity duration-1000 ease-out pb-5 md:pb-0 ${
             imgVisible ? "opacity-100" : "opacity-0"
           }`}
         >

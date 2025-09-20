@@ -73,3 +73,12 @@ html, body {
 .animate-fadeOutDown {
   animation: fadeOutDown 0.5s ease forwards;
 }
+
+.animate-fadeInImage {
+  animation: fadeIn 0.3s ease forwards;
+}
+
+@keyframes fadeInImage {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}

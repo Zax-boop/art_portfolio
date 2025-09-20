@@ -7,6 +7,7 @@ import { useState, useEffect, useRef } from "react";
 import AddArt from "./components/art/addArt";
 import { PlusIcon } from "lucide-react"
 import { useMediaQuery } from "react-responsive";
+import { User } from "@supabase/supabase-js";
 
 
 export default function HomePage() {
@@ -25,14 +26,25 @@ export default function HomePage() {
 
   useEffect(() => {
     setIsClient(true);
-  }, []); 
+  }, []);
   const [art, setArt] = useState<Art[]>([])
   const [showAddArtModal, setShowAddArtModal] = useState(false)
   const [loading, setLoading] = useState(true)
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  const [direction, setDirection] = useState<"left" | "right" | null>(null);
   const [isAnimating, setIsAnimating] = useState(false);
-
+  const [firstOpen, setFirstOpen] = useState(true);
   const touchStartX = useRef<number | null>(null);
+
+  const [user, setUser] = useState<User | null>(null);
+  useEffect(() => {
+    const getSession = async () => {
+      const { data } = await supabase.auth.getSession();
+      setUser(data.session?.user || null);
+    };
+
+    getSession();
+  }, []);
 
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => {
@@ -63,7 +75,11 @@ export default function HomePage() {
   };
 
   const handleChange = (newIndex: number) => {
+    if (newIndex === activeIndex) return;
+
+    setDirection(newIndex > activeIndex! ? "right" : "left");
     setIsAnimating(true);
+
     setTimeout(() => {
       setActiveIndex(newIndex);
       setIsAnimating(false);
@@ -86,7 +102,7 @@ export default function HomePage() {
   return (
     <div className="bg-white flex flex-col w-full items-center pb-20 min-h-[100vh]">
       <div className="w-11/12">
-        {!isMobile && <div className="w-full flex justify-end">
+        {user && <div className="w-full flex justify-end">
           <button
             onClick={() => setShowAddArtModal(true)}
             className="flex items-center gap-2 pl-3 mr-2 py-2 bg-white border border-black text-black rounded-full hover:bg-black hover:text-white transition duration-300 cursor-pointer"
@@ -150,7 +166,7 @@ export default function HomePage() {
             </div>
           </div>
         ) : (
-          <p>Loading art...</p>
+          <p className="text-black">Loading art...</p>
         )}
         {activeIndex !== null && (
           <div
@@ -159,7 +175,7 @@ export default function HomePage() {
             onTouchEnd={handleTouchEnd}
           >
             <button
-              onClick={() => setActiveIndex(null)}
+              onClick={() => (setActiveIndex(null), setFirstOpen(true))}
               className="absolute top-4 right-4 text-black text-3xl md:text-4xl z-50 cursor-pointer transition-transform duration-200 ease-out hover:scale-110 hover:text-red-600"
             >
               ✕
@@ -167,7 +183,7 @@ export default function HomePage() {
             {activeIndex > 0 && (
               <button
                 onClick={() => handleChange(activeIndex - 1)}
-                className="absolute left-4 top-1/2 transform -translate-y-1/2 text-3xl md:text-4xl z-50 px-2 py-1 rounded-full text-black transition-transform duration-200 ease-out hover:scale-110"
+                className="hidden md:block absolute left-4 top-1/2 transform -translate-y-1/2 text-3xl md:text-4xl z-50 px-2 py-1 rounded-full text-black transition-transform duration-200 ease-out hover:scale-110"
               >
                 ‹
               </button>
@@ -175,7 +191,7 @@ export default function HomePage() {
             {activeIndex < art.length - 1 && (
               <button
                 onClick={() => handleChange(activeIndex + 1)}
-                className="absolute right-4 top-1/2 transform -translate-y-1/2 text-3xl md:text-4xl z-50 px-2 py-1 rounded-full text-black transition-transform duration-200 ease-out hover:scale-110"
+                className="hidden md:block absolute right-4 top-1/2 transform -translate-y-1/2 text-3xl md:text-4xl z-50 px-2 py-1 rounded-full text-black transition-transform duration-200 ease-out hover:scale-110"
               >
                 ›
               </button>
@@ -183,8 +199,19 @@ export default function HomePage() {
             <img
               src={art[activeIndex].image}
               alt={art[activeIndex].description || "Full screen art"}
-              className={`max-h-[48rem] max-w-[70rem] object-contain rounded-lg shadow-lg transition-opacity duration-200 ${isAnimating ? "opacity-0" : "opacity-100"
-                }`}
+              className={`
+        max-h-[30rem] md:max-h-[48rem] md:max-w-[70rem]
+        object-contain rounded-lg shadow-lg
+        transition-transform duration-200 ease-out
+        ${firstOpen ? "opacity-0 animate-fadeIn" : ""}
+        ${isAnimating
+                  ? direction === "left"
+                    ? "-translate-x-20 opacity-0"
+                    : "translate-x-20 opacity-0"
+                  : "translate-x-0 opacity-100"
+                }
+      `}
+              onAnimationEnd={() => setFirstOpen(false)}
             />
           </div>
         )}

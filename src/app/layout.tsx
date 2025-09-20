@@ -18,7 +18,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <div className="xs:w-3/5 md:w-1/5">
           <Header />
         </div>
-        <main className="w-full h-screen flex flex-col items-center">{children}</main>
+        <main className="w-full flex flex-col items-center">{children}</main>
       </body>
     </html>
   );
