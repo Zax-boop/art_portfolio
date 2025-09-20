@@ -85,9 +85,6 @@ export default function HomePage() {
 
   return (
     <div className="bg-white flex flex-col w-full items-center pb-20 min-h-[100vh]">
-      <div className="xs:w-3/5 md:w-1/5">
-        <Header />
-      </div>
       <div className="w-11/12">
         {!isMobile && <div className="w-full flex justify-end">
           <button
@@ -161,7 +158,6 @@ export default function HomePage() {
             onTouchStart={handleTouchStart}
             onTouchEnd={handleTouchEnd}
           >
-            {/* Close button */}
             <button
               onClick={() => setActiveIndex(null)}
               className="absolute top-4 right-4 text-black text-3xl md:text-4xl z-50 cursor-pointer transition-transform duration-200 ease-out hover:scale-110 hover:text-red-600"

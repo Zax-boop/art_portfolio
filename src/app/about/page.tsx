@@ -32,12 +32,7 @@ export default function About() {
 
   return (
     <div className="bg-white min-h-screen flex flex-col w-full items-center text-black pb-20">
-      <div className="xs:w-3/5 md:w-1/5">
-        <Header />
-      </div>
-
       <div className="flex flex-col lg:flex-row w-11/12 mt-20 mb-20 gap-10 items-center lg:items-start">
-        {/* Text Section */}
         <div
           ref={textRef}
           className={`flex flex-col lg:w-2/3 transition-opacity duration-1000 ease-out ${

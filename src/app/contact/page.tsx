@@ -23,19 +23,13 @@ export default function Contact() {
 
     return (
         <div className="bg-white min-h-screen flex flex-col w-full items-center">
-      <div className="xs:w-3/5 md:w-1/5">
-                <Header />
-            </div>
-
-            <h1 className="text-4xl font-bold mb-8 text-black animate-fadeIn mt-20">
+            <h1 className="text-2xl md:text-4xl font-bold mb-2 md:mb-8 text-black animate-fadeIn mt-8 md:mt-20">
                 Contact
             </h1>
-
             <form
                 onSubmit={handleSubmit}
                 className="flex flex-col w-11/12 max-w-lg gap-6"
             >
-                {/* Name */}
                 <div
                     className="relative group opacity-0 translate-y-4 animate-fadeInUp"
                     style={{ animationDelay: "0.1s", animationFillMode: "forwards" }}
@@ -54,8 +48,6 @@ export default function Contact() {
                             }`}
                     />
                 </div>
-
-                {/* Email */}
                 <div
                     className="relative group opacity-0 translate-y-4 animate-fadeInUp"
                     style={{ animationDelay: "0.3s", animationFillMode: "forwards" }}
@@ -74,8 +66,6 @@ export default function Contact() {
                             }`}
                     />
                 </div>
-
-                {/* Message */}
                 <div
                     className="relative group opacity-0 translate-y-4 animate-fadeInUp"
                     style={{ animationDelay: "0.5s", animationFillMode: "forwards" }}
@@ -95,8 +85,6 @@ export default function Contact() {
                             }`}
                     />
                 </div>
-
-                {/* Send Button */}
                 <button
                     type="submit"
                     className="self-start bg-black text-white px-6 py-3 rounded hover:bg-gray-900 transition-colors duration-300 opacity-0 animate-fadeInUp"
