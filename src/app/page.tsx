@@ -1,7 +1,4 @@
 "use client";
-import Image from "next/image";
-import Link from "next/link";
-import Header from "./components/general/header";
 import supabase from "../../utils/general/supabaseclient";
 import { useState, useEffect, useRef } from "react";
 import AddArt from "./components/art/addArt";
@@ -102,7 +99,7 @@ export default function HomePage() {
   return (
     <div className="bg-white flex flex-col w-full items-center pb-20 min-h-[100vh]">
       <div className="w-11/12">
-        {user && <div className="w-full flex justify-end">
+        {user && <div className="w-full flex justify-end mb-2 md:mb-0">
           <button
             onClick={() => setShowAddArtModal(true)}
             className="flex items-center gap-2 pl-3 mr-2 py-2 bg-white border border-black text-black rounded-full hover:bg-black hover:text-white transition duration-300 cursor-pointer"

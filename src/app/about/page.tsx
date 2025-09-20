@@ -1,6 +1,5 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
-import Header from "../components/general/header";
 
 export default function About() {
   const textRef = useRef<HTMLDivElement>(null);
