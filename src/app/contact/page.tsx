@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 export default function Contact() {
     const [name, setName] = useState("");
@@ -9,25 +9,16 @@ export default function Contact() {
     const [emailFocus, setEmailFocus] = useState(false);
     const [message, setMessage] = useState("");
     const [messageFocus, setMessageFocus] = useState(false);
-    const [isMobile, setIsMobile] = useState(false);
-
-    useEffect(() => {
-        setIsMobile(/iPhone|iPad|iPod|Android/i.test(navigator.userAgent));
-    }, []);
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        const subject = encodeURIComponent(`Message from ${name}`);
-        const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`);
-
-        if (isMobile) {
-            const gmailLink = `https://mail.google.com/mail/?view=cm&fs=1&to=rohan.arya01@gmail.com&su=${subject}&body=${body}`;
-            window.open(gmailLink, "_blank");
-        } else {
-            const mailtoLink = `mailto:rohan.arya01@gmail.com?subject=${subject}&body=${body}`;
-            window.open(mailtoLink, "_blank");
-        }
+        const mailtoLink = `mailto:rohan.arya01@gmail.com?subject=Message from ${name}&body=${encodeURIComponent(
+            `Name: ${name}\nEmail: ${email}\n\n${message}`
+        )}`;
+        const newWindow = window.open(mailtoLink, "_blank");
+        if (newWindow) newWindow.focus();
     };
+
     return (
         <div className="bg-white flex flex-col w-full items-center">
             <form
