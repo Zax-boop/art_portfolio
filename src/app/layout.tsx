@@ -8,7 +8,7 @@ const playfair = Playfair_Display({
 });
 
 export const metadata = {
-  title: "Anubhuti's Portfolio",
+  title: "About Imagination Art",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

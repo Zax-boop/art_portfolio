@@ -12,7 +12,7 @@ export default function Contact() {
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        const mailtoLink = `mailto:rohan.arya01@gmail.com?subject=Message from ${name}&body=${encodeURIComponent(
+        const mailtoLink = `mailto:imagination.arts.class@gmail.com?subject=Message from ${name}&body=${encodeURIComponent(
             `Name: ${name}\nEmail: ${email}\n\n${message}`
         )}`;
         const newWindow = window.open(mailtoLink, "_blank");

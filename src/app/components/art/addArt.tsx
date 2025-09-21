@@ -8,10 +8,7 @@ type AddArtProps = {
 export default function AddArt({ onUpload }: AddArtProps) {
     const [file, setFile] = useState<File | null>(null)
     const [previewUrl, setPreviewUrl] = useState<string | undefined>(undefined)
-    const [name, setName] = useState("")
-    const [description, setDescription] = useState("")
-    const [dateDrawn, setDateDrawn] = useState("")
-    const [isGif, setIsGif] = useState(false)
+    const [type, setType] = useState("")
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState("")
 
@@ -20,10 +17,8 @@ export default function AddArt({ onUpload }: AddArtProps) {
         setFile(selected)
         if (selected) {
             setPreviewUrl(URL.createObjectURL(selected))
-            setIsGif(selected.type === "image/gif")
         } else {
             setPreviewUrl(undefined)
-            setIsGif(false)
         }
     }
 
@@ -50,10 +45,8 @@ export default function AddArt({ onUpload }: AddArtProps) {
                 .from("artwork")
                 .insert([
                     {
-                        name,
-                        description,
-                        created: dateDrawn,
                         image: imageUrl,
+                        type,
                     },
                 ])
 
@@ -61,9 +54,7 @@ export default function AddArt({ onUpload }: AddArtProps) {
 
             setFile(null)
             setPreviewUrl(undefined)
-            setDescription("")
-            setDateDrawn("")
-            setIsGif(false)
+            setType("")
 
             if (onUpload) onUpload()
         } catch (err) {
@@ -100,33 +91,18 @@ export default function AddArt({ onUpload }: AddArtProps) {
                     Choose File
                 </label>
             </div>
-
             <div className="flex justify-center">
                 <img
                     src={previewUrl}
                     alt="Preview"
-                    className="w-auto max-h-[20rem] h-auto object-cover rounded-xl shadow-md border border-gray-700 mt-2"
+                    className="w-auto max-h-[25rem] md:max-h-[28rem] h-auto object-cover rounded-xl shadow-md border border-gray-700 mt-2"
                 />
             </div>
             <input
                 type="text"
-                placeholder="Name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                className="p-2 border border-gray-700 rounded bg-gray-800 text-white"
-            />
-            <input
-                type="text"
-                placeholder="Description"
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-                className="p-2 border border-gray-700 rounded bg-gray-800 text-white"
-            />
-
-            <input
-                type="date"
-                value={dateDrawn}
-                onChange={(e) => setDateDrawn(e.target.value)}
+                placeholder="Type"
+                value={type}
+                onChange={(e) => setType(e.target.value)}
                 className="p-2 border border-gray-700 rounded bg-gray-800 text-white"
             />
             {error && <p className="text-red-500">{error}</p>}
