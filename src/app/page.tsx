@@ -138,7 +138,7 @@ export default function HomePage() {
                   tabRefs.current[tab] = el;
                 }}
                 onClick={() => setActiveTab(tab)}
-                className={`relative z-10 px-6 py-2 text-sm md:text-lg font-medium transition-colors duration-300 ${activeTab === tab ? "text-white" : "text-black hover:text-gray-500"}`}
+                className={`relative z-0 px-6 py-2 text-sm md:text-lg font-medium transition-colors duration-300 ${activeTab === tab ? "text-white" : "text-black hover:text-gray-500"}`}
               >
                 {tab[0].toUpperCase() + tab.slice(1)}
               </button>
